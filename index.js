@@ -18,14 +18,23 @@ app.post("/todos", async (req, res, next) => {
       [message]
     );
     res.json(newTodo);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 });
 
 //get all todos
 
-//get a todo
+app.get("/todos", async (req, res, next) => {
+  try {
+    let allTodos = await pool.query("SELECT * FROM todo");
+    res.json(allTodos);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//get a single todo
 
 //update a todo
 
