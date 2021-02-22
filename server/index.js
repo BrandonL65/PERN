@@ -26,9 +26,10 @@ app.post("/todos", async (req, res, next) => {
 //get all todos
 
 app.get("/todos", async (req, res, next) => {
+  console.log("Getting all Todos...");
   try {
     let allTodos = await pool.query("SELECT * FROM todo");
-    res.json(allTodos);
+    res.json(allTodos.rows);
   } catch (err) {
     console.log(err);
   }
@@ -49,6 +50,7 @@ app.get("/todos/:id", async (req, res, next) => {
 
 //update a todo
 app.put("/todos/:id", async (req, res, next) => {
+  console.log(req.body, req.params.id);
   try {
     const idOfTodo = req.params.id;
     const newDescription = req.body.description;
