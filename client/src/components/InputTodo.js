@@ -14,8 +14,8 @@ const InputTodo = () => {
           description: description,
         }),
       });
-      // let jsoned = await resp.json();
       console.log(resp);
+      window.location = "/";
     } catch (error) {
       console.error(error.message);
     }
