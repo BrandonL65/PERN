@@ -48,8 +48,32 @@ app.get("/todos/:id", async (req, res, next) => {
 });
 
 //update a todo
+app.put("/todos/:id", async (req, res, next) => {
+  try {
+    const idOfTodo = req.params.id;
+    const newDescription = req.body.description;
+    const updateTodo = await pool.query(
+      "UPDATE todo SET description = $1 where todo_id = $2",
+      [newDescription, idOfTodo]
+    );
+
+    res.json(`Todo # ${idOfTodo} was updated!`);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
 
 //delete a todo
+app.delete("/todos/:id", async (req, res, next) => {
+  try {
+    const idOfTodo = req.params.id;
+    await pool.query("DELETE FROM todo WHERE todo_id = $1", [idOfTodo]);
+
+    res.json(`Todo with ID of ${idOfTodo} was deleted.`);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
 
 app.listen(5000, () => {
   console.log("server started");
