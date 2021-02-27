@@ -24,7 +24,6 @@ app.post("/todos", async (req, res, next) => {
 });
 
 //get all todos
-
 app.get("/todos", async (req, res, next) => {
   console.log("Getting all Todos...");
   try {
